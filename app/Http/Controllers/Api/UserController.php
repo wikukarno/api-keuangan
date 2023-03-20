@@ -93,11 +93,10 @@ class UserController extends Controller
                 'user' => $user
             ], 'User Registered');
         } catch (Exception $error) {
-            dd($error);
-            // return ResponseFormatter::error([
-            //     'message' => 'Something went wrong',
-            //     'error' => $error,
-            // ], 'Authentication Failed', 500);
+            return ResponseFormatter::error([
+                'message' => 'Something went wrong',
+                'error' => $error,
+            ], 'Authentication Failed', 500);
         }
     }
 
