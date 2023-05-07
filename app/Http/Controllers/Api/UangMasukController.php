@@ -2,64 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\UangMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UangMasukController extends Controller
 {
-    public function getUangMasuk(Request $request)
+    public function storeUangMasuk(Request $request)
     {
-        $uangMasuk = UangMasuk::where('users_id', $request->user()->id)->get();
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $uangMasuk,
+        $request->validate([
+            'nama_masuk' => 'required',
+            'deskripsi' => 'required',
+            'harga_masuk' => 'required',
+            'tanggal_masuk' => 'required',
         ]);
-    }
 
-    public function createUangMasuk(Request $request)
-    {
+
         $uangMasuk = UangMasuk::create([
-            'users_id' => $request->user()->id,
-            'nama' => $request->nama,
-            'nominal' => $request->nominal,
-            'keterangan' => $request->keterangan,
-            'tanggal' => $request->tanggal,
+            'users_id' => Auth::user()->id,
+            'nama_masuk' => $request->nama_masuk,
+            'deskripsi' => $request->deskripsi,
+            'harga_masuk' => $request->harga_masuk,
+            'tanggal_masuk' => $request->tanggal_masuk,
         ]);
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $uangMasuk,
-        ]);
-    }
-
-    public function updateUangMasuk(Request $request, $id)
-    {
-        $uangMasuk = UangMasuk::findOrFail($id);
-
-        $uangMasuk->update([
-            'nama' => $request->nama,
-            'nominal' => $request->nominal,
-            'keterangan' => $request->keterangan,
-            'tanggal' => $request->tanggal,
-        ]);
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $uangMasuk,
-        ]);
-    }
-
-    public function deleteUangMasuk($id)
-    {
-        $uangMasuk = UangMasuk::findOrFail($id);
-
-        $uangMasuk->delete();
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $uangMasuk,
-        ]);
+        return ResponseFormatter::success([
+            'message' => 'Data Successfully Added',
+            'data' => $uangMasuk
+        ], 'Data Successfully Added', 200);
     }
 }

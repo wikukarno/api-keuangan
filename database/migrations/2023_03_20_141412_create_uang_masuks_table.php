@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('uang_masuks', function (Blueprint $table) {
             $table->id();
+            $table->string('users_id');
+            $table->string('nama_masuk');
+            $table->string('deskripsi');
+            $table->integer('harga_masuk');
+            $table->date('tanggal_masuk');
             $table->timestamps();
         });
     }

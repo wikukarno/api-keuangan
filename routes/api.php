@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\UangKeluarController;
+use App\Http\Controllers\Api\UangMasukController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
+    
+    Route::post('uang-keluar/store', [UangKeluarController::class, 'storeUangKeluar']);
+    Route::post('uang-masuk/store', [UangMasukController::class, 'storeUangMasuk']);
     Route::post('logout', [UserController::class, 'logout']);
 });
 

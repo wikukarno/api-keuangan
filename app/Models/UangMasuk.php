@@ -11,11 +11,10 @@ class UangMasuk extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [
-        'users_id',
-        'nama',
-        'nominal',
-        'keterangan',
-        'tanggal',
+    protected $table = 'uang_masuks';
+    protected $primaryKey = 'id';
+
+    protected $guarded = [
+        'id'
     ];
 }
