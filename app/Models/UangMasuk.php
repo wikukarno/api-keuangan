@@ -11,7 +11,7 @@ class UangMasuk extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'uang_masuks';
+    protected $table = 'uang_masuk';
     protected $primaryKey = 'id';
 
     protected $guarded = [

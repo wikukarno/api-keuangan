@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
+    Route::get('uang-masuk', [UangMasukController::class, 'getUangMasuk']);
+    Route::get('uang-keluar', [UangKeluarController::class, 'getUangKeluar']);
     
     Route::post('uang-keluar/store', [UangKeluarController::class, 'storeUangKeluar']);
     Route::post('uang-masuk/store', [UangMasukController::class, 'storeUangMasuk']);

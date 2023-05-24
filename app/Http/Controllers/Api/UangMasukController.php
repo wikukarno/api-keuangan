@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\UangMasuk;
 use Illuminate\Http\Request;
@@ -10,6 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class UangMasukController extends Controller
 {
+    public function getUangMasuk(Request $request)
+    {
+        $uangMasuk = UangMasuk::where('users_id', Auth::user()->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'List Data Uang Masuk Berhasil Diambil',
+            'data' => $uangMasuk
+        ], 200);
+        
+    }
+
     public function storeUangMasuk(Request $request)
     {
         $request->validate([
@@ -28,9 +39,10 @@ class UangMasukController extends Controller
             'tanggal_masuk' => $request->tanggal_masuk,
         ]);
 
-        return ResponseFormatter::success([
-            'message' => 'Data Successfully Added',
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Uang Masuk Berhasil Disimpan',
             'data' => $uangMasuk
-        ], 'Data Successfully Added', 200);
+        ], 200);
     }
 }
