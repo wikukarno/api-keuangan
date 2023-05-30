@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\UangKeluar;
 use Illuminate\Http\Request;
@@ -41,10 +42,6 @@ class UangKeluarController extends Controller
             'tanggal_pembelian' => $request->tanggal_pembelian,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Data Uang Keluar Berhasil Disimpan',
-            'data' => $uangKeluar
-        ], 200);
+        return ResponseFormatter::success($uangKeluar, 'Data Uang Keluar Berhasil Ditambahkan');
     }
 }
