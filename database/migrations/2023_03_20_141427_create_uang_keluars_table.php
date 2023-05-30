@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('uang_keluars', function (Blueprint $table) {
             $table->id();
+            $table->string('users_id');
+            $table->string('kategori_id');
+            $table->string('nama_barang');
+            $table->integer('harga');
+            $table->string('metode_pembayaran');
+            $table->date('tanggal_pembelian');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
