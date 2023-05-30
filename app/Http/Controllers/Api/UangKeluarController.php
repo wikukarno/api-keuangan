@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class UangKeluarController extends Controller
 {
+
+    public function getUangKeluar(Request $request)
+    {
+        $uangKeluar = UangKeluar::where('users_id', Auth::user()->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'List Data Uang Keluar Berhasil Diambil',
+            'data' => $uangKeluar
+        ], 200);
+    }
+
     public function storeUangKeluar(Request $request)
     {
         $request->validate([
